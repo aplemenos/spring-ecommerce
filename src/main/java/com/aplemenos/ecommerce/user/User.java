@@ -31,7 +31,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    /** BCrypt hash — never the raw password, and never exposed through a DTO. */
+    /** Bcrypt hash — never the raw password, and never exposed through a DTO. */
     @Column(nullable = false)
     private String password;
 
