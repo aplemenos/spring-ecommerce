@@ -44,6 +44,10 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/v3/api-docs/**",
                                 "/actuator/health").permitAll()
+                        // Container-level errors (405, unmapped 404) re-dispatch to /error.
+                        // The JWT filter does not run on ERROR dispatches, so without this
+                        // the real status is masked by a misleading 401.
+                        .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())
                 // Return 401 instead of redirecting to a login page
                 .exceptionHandling(ex ->
