@@ -38,6 +38,9 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
+                        // Payment providers call the webhook; they are not logged-in users.
+                        // The provider's signature is verified inside the gateway instead.
+                        .requestMatchers("/api/payments/webhook/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
                         .requestMatchers(
                                 "/swagger-ui/**",

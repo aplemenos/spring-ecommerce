@@ -23,6 +23,11 @@ spring:
     enabled: true
     locations: classpath:db/migration
 
+payment:
+  # Base URL the customer is redirected to in order to pay. With a real provider
+  # this is replaced by the provider's own hosted checkout URL.
+  checkout-base-url: ${PAYMENT_CHECKOUT_BASE_URL:https://pay.example.com}
+
 jwt:
   # Dev-only default. In production ALWAYS set JWT_SECRET as an environment variable.
   # HS256 requires at least 256 bits (32+ characters).
